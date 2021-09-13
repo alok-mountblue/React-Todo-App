@@ -1,10 +1,10 @@
-import React, { useState} from 'react';
-import List from './List';
+import React, { useState } from "react";
+import List from "./List";
 
 export const listContext = React.createContext();
 
 function App() {
-  const [name, setName] = useState('');
+  const [name, setName] = useState("");
   const [items, setItem] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [editID, setEditID] = useState(null);
@@ -22,17 +22,16 @@ function App() {
           return item;
         })
       );
-      setName('');
+      setName("");
       setEditID(null);
       setIsEditing(false);
     } else {
       const newItem = { id: new Date().getTime().toString(), title: name };
 
       setItem([...items, newItem]);
-      setName('');
+      setName("");
     }
   };
-
 
   const clearList = () => {
     setItem([]);
@@ -51,37 +50,35 @@ function App() {
 
   return (
     <>
-     <listContext.Provider
-      value={{ items, removeItem, editItem }}
-    >
-      <div>
+      <listContext.Provider value={{ items, removeItem, editItem }}>
         <div>
-          <figure>
-            <h1>Todo App</h1>
-          </figure>
           <div>
-            <input
-              type="text"
-              placeholder=" Add item"
-              className="form-control"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            <button className="ui button blue" onClick={addItem}>
-              ADD
-            </button>
-          </div>
-          <div>
-            <List items={items} removeItem={removeItem} editItem={editItem} />
-                <button className='clear-btn' onClick={clearList}>
-                  clear items
-                </button>
+            <figure>
+              <h1>Todo App</h1>
+            </figure>
+            <div>
+              <input
+                type="text"
+                placeholder=" Add item"
+                className="form-control"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+              <button className="ui button blue" onClick={addItem}>
+                ADD
+              </button>
+            </div>
+            <div>
+              <List items={items} removeItem={removeItem} editItem={editItem} />
+              <button className="clear-btn" onClick={clearList}>
+                clear items
+              </button>
+            </div>
           </div>
         </div>
-      </div>
       </listContext.Provider>
     </>
   );
 }
- 
+
 export default App;
