@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import List from "./List";
 
-export const listContext = React.createContext();
-
 function App() {
   const [name, setName] = useState("");
   const [items, setItem] = useState([]);
@@ -50,33 +48,31 @@ function App() {
 
   return (
     <>
-      <listContext.Provider value={{ items, removeItem, editItem }}>
+      <div>
         <div>
+          <figure>
+            <h1>Todo App</h1>
+          </figure>
           <div>
-            <figure>
-              <h1>Todo App</h1>
-            </figure>
-            <div>
-              <input
-                type="text"
-                placeholder=" Add item"
-                className="form-control"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-              <button className="ui button blue" onClick={addItem}>
-                ADD
-              </button>
-            </div>
-            <div>
-              <List items={items} removeItem={removeItem} editItem={editItem} />
-              <button className="clear-btn" onClick={clearList}>
-                clear items
-              </button>
-            </div>
+            <input
+              type="text"
+              placeholder=" Add item"
+              className="form-control"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <button className="ui button blue" onClick={addItem}>
+              ADD
+            </button>
+          </div>
+          <div>
+            <List items={items} removeItem={removeItem} editItem={editItem} />
+            <button className="clear-btn" onClick={clearList}>
+              clear items
+            </button>
           </div>
         </div>
-      </listContext.Provider>
+      </div>
     </>
   );
 }
